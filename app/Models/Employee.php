@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Employee extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'shift_id',
+        'employee_code',
+        'full_name',
+        'email',
+        'phone',
+        'department',
+        'designation',
+        'joining_date',
+        'status',
+    ];
+
+    protected $casts = [
+        'joining_date' => 'date',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+    public function assignedLeads()
+    {
+        return $this->hasMany(Lead::class, 'assigned_to');
+    }
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+    public function shift()
+    {
+        return $this->belongsTo(\App\Models\Shift::class);
+    }
+}
