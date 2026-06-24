@@ -18,3 +18,5 @@ yarn-error.log
 /.idea
 /.vscode
 *.zip
+public/build.zip
+public/build/
